@@ -1,9 +1,14 @@
 package srongklod_bangtamruat.plantseconomic;
 
+import android.content.res.Configuration;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import srongklod_bangtamruat.plantseconomic.fragment.CustomerShowFragment;
+import srongklod_bangtamruat.plantseconomic.fragment.DrawerMenuCustomerFragment;
 import srongklod_bangtamruat.plantseconomic.fragment.SupplierShowFragment;
 import srongklod_bangtamruat.plantseconomic.fragment.TransportShowFragment;
 import srongklod_bangtamruat.plantseconomic.utility.CustomerModel;
@@ -30,6 +36,9 @@ public class ServiceActivity extends AppCompatActivity {
 //    About Firebase
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+
 
 
     //    General
@@ -55,8 +64,37 @@ public class ServiceActivity extends AppCompatActivity {
 //        Find userUid in Transport
         findUserUidinTransport();
 
+        createToolbar();
+
 
     }   // Main Method
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+
+
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        actionBarDrawerToggle.syncState();
+
+    }
 
     private void createToolbar() {
 
@@ -67,6 +105,13 @@ public class ServiceActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(titleToolbarString);
         getSupportActionBar().setSubtitle(subTitleToolbarString);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        drawerLayout = findViewById(R.id.drawerLayoutService);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(ServiceActivity.this,
+                drawerLayout, R.string.open, R.string.close);
 
 
     }
@@ -251,6 +296,11 @@ public class ServiceActivity extends AppCompatActivity {
                             subTitleToolbarString = customerStrings[1] + " " + customerStrings[0];
 
                             createToolbar();
+
+                            getSupportFragmentManager().beginTransaction()
+                                    .add(R.id.contentDrawerMenuFragment,
+                                            new DrawerMenuCustomerFragment())
+                                    .commit();
 
                             getSupportFragmentManager().beginTransaction()
                                     .add(R.id.contentServiceFragment,

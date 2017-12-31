@@ -23,5 +23,8 @@
     <string name="massage_have_space">Please Fill All Every Blank</string>
     <string name="or">or</string>
 
+    <string name="open">Open Drawer</string>
+    <string name="close">Close Drawer</string>
+
 
 </resources>

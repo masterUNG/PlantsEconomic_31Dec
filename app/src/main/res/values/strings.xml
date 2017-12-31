@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Plants Economic</string>
+    <string name="email">Email :</string>
+    <string name="password">Password :</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">New Register</string>
+    <string name="Customer">Customer</string>
+    <string name="supplier">Supplier</string>
+    <string name="Transport">Transport</string>
+    <string name="name">Name :</string>
+    <string name="lastname">Lastname :</string>
+    <string name="phone_66812345678">Phone +66812345678</string>
+    <string name="save">SAVE</string>
+    <string name="company_name">Company Name :</string>
+    <string name="address">Address :</string>
+    <string name="fax_6612345678">Fax : +6612345678</string>
+    <string name="telephone_021234567">Telephone : +021234567</string>
+    <string name="business">Business : ผลิต พืชเศรษฐกิจ</string>
+    <string name="head_quarter">Head Quarter :</string>
+    <string name="branch">Branch :</string>
+
+    <string name="title_have_space">Have Space</string>
+    <string name="massage_have_space">Please Fill All Every Blank</string>
+    <string name="or">or</string>
+
+
+</resources>

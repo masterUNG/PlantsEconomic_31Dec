@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Content-->
+    <ScrollView
+        android:layout_above="@id/btnSaveSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Content-->
+            <LinearLayout
+                android:background="@color/bg"
+                android:padding="@dimen/margin"
+                android:layout_margin="@dimen/margin"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+               <!--Company Name-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_company"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:id="@+id/edtCompanyName"
+                        android:inputType="text"
+                        android:textSize="@dimen/h2"
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:hint="@string/company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Address-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_address"
+                        android:layout_gravity="start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:id="@+id/edtAddress"
+                        android:inputType="textMultiLine"
+                        android:gravity="start"
+                        android:lines="5"
+                        android:textSize="@dimen/h2"
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:hint="@string/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Fax-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_fax"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:id="@+id/edtFax"
+                        android:inputType="phone"
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textSize="@dimen/h2"
+                        android:hint="@string/fax_6612345678"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Telephone-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_telephone"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textSize="@dimen/h2"
+                        android:id="@+id/edtTelephone"
+                        android:inputType="phone"
+                        android:hint="@string/telephone_021234567"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Business-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_business"
+                        android:layout_gravity="start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textSize="@dimen/h2"
+                        android:id="@+id/edtBusiness"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:gravity="start"
+                        android:hint="@string/business"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Email-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_email"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textSize="@dimen/h2"
+                        android:id="@+id/edtEmail"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Password-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_password"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textSize="@dimen/h2"
+                        android:id="@+id/edtPassword"
+                        android:inputType="textPassword"
+                        android:hint="@string/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <!--Head Quarters-->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!--icon-->
+                    <ImageView
+                        android:src="@drawable/ic_action_headquarters"
+                        android:layout_gravity="start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--textField-->
+                    <EditText
+                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textSize="@dimen/h2"
+                        android:id="@+id/edtHead"
+                        android:gravity="start"
+                        android:lines="3"
+                        android:inputType="textMultiLine"
+                        android:hint="@string/head_quarter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <!--Button-->
+    <Button
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/h1"
+        android:background="@color/bg"
+        android:layout_margin="@dimen/margin"
+        android:id="@+id/btnSaveSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/save" />
+
+</RelativeLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "222442588944",
+    "firebase_url": "https://plantseconomic.firebaseio.com",
+    "project_id": "plantseconomic",
+    "storage_bucket": "plantseconomic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222442588944:android:8c9d22ccebcba0c3",
+        "android_client_info": {
+          "package_name": "srongklod_bangtamruat.plantseconomic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222442588944-ipse4qq8ua8dbc05v4c2oe7o9j0su9pe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "srongklod_bangtamruat.plantseconomic",
+            "certificate_hash": "99f1de59cbbb9f0ab27aeb63c596235bc843b92a"
+          }
+        },
+        {
+          "client_id": "222442588944-3hs2311q6fv7sp2t1u4js91q97kb9jfi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbIJJmAAdGmCOUVSvKoqHL3FkvJf3oBdE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222442588944-3hs2311q6fv7sp2t1u4js91q97kb9jfi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

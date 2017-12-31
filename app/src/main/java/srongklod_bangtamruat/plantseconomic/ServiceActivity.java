@@ -17,6 +17,7 @@ import java.util.List;
 
 import srongklod_bangtamruat.plantseconomic.fragment.CustomerShowFragment;
 import srongklod_bangtamruat.plantseconomic.fragment.SupplierShowFragment;
+import srongklod_bangtamruat.plantseconomic.fragment.TransportShowFragment;
 import srongklod_bangtamruat.plantseconomic.utility.CustomerModel;
 import srongklod_bangtamruat.plantseconomic.utility.MyConstant;
 import srongklod_bangtamruat.plantseconomic.utility.SupplierModel;
@@ -59,6 +60,8 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void findUserUidinTransport() {
 
+        Log.d("31DecV1", "status ==> " + statusABoolean);
+
         if (statusABoolean) {
 
             MyConstant myConstant = new MyConstant();
@@ -91,6 +94,18 @@ public class ServiceActivity extends AppCompatActivity {
                             transportStrings[4] = transportModel1.getHeadquarterString();
                             transportStrings[5] = transportModel1.getTelephoneString();
                             transportStrings[6] = transportModel1.getUidUserString();
+
+                           for (int i1=0; i1<transportStrings.length; i1+=1) {
+                               Log.d("31DecV1", "transportString[" + i1 + "] => " + transportStrings[i1]);
+                           }
+
+
+
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .add(R.id.contentServiceFragment, TransportShowFragment.transportShowInstance(transportStrings))
+                                    .commit();
+
 
                         }   // if
 

@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import srongklod_bangtamruat.plantseconomic.R;
+import srongklod_bangtamruat.plantseconomic.ServiceActivity;
 
 /**
  * Created by masterung on 30/12/2017 AD.
@@ -39,17 +41,13 @@ public class CustomerShowFragment extends Fragment{
 //        Get Value From Activity
         customerStrings = getArguments().getStringArray("Customer");
 
-//        Test Show
-        testShow();
+
+
 
     }   // Main Method
 
-    private void testShow() {
 
-        TextView textView = getView().findViewById(R.id.txtShowCustomer);
-        textView.setText(customerStrings[1] + " " + customerStrings[0]);
 
-    }
 
     @Nullable
     @Override

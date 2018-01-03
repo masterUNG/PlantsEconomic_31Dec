@@ -25,6 +25,7 @@
 
     <string name="open">Open Drawer</string>
     <string name="close">Close Drawer</string>
+    <string name="message_choose_image">Please Choose App For Choose Image</string>
 
 
 </resources>

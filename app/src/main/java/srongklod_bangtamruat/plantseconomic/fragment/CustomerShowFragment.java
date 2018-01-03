@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Random;
 
@@ -68,6 +69,9 @@ public class CustomerShowFragment extends Fragment {
 //        Show Text
         showText();
 
+//        Show Image
+        showImage();
+
 //        Image Controller
         imageController();
 
@@ -76,6 +80,15 @@ public class CustomerShowFragment extends Fragment {
 
 
     }   // Main Method
+
+    private void showImage() {
+
+        String urlImage = "https://firebasestorage.googleapis.com/v0/b/plantseconomic.appspot.com/o/Avata%2FDBnbBV0EX0UmJSP6AlcJ5SMisHD3_30?alt=media&token=6c1f6cc8-a2e7-49e2-896d-6c27771e1e18";
+
+        circleImageView = getView().findViewById(R.id.imvAvata);
+        Picasso.with(getActivity()).load(urlImage).into(circleImageView);
+
+    }
 
     private void uploadController() {
 
@@ -127,7 +140,8 @@ public class CustomerShowFragment extends Fragment {
                             @Override
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                double processADouble = 100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount();
+                                double processADouble = 100.0 * taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount();
                                 int processAInt = (int) processADouble;
 
                                 progressDialog.setMessage("Upload ==> " + Integer.toString(processAInt) + " %");
@@ -189,7 +203,7 @@ public class CustomerShowFragment extends Fragment {
 
     private void imageController() {
 
-        circleImageView = getView().findViewById(R.id.imvAvata);
+
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

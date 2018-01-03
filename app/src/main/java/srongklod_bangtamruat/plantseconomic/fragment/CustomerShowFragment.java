@@ -1,5 +1,6 @@
 package srongklod_bangtamruat.plantseconomic.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,12 +10,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.Random;
 
 import srongklod_bangtamruat.plantseconomic.R;
 import srongklod_bangtamruat.plantseconomic.ServiceActivity;
@@ -31,6 +42,9 @@ public class CustomerShowFragment extends Fragment {
     private Uri uri;
     private ImageView imageView;
     private de.hdodenhof.circleimageview.CircleImageView circleImageView;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
+    private boolean statusABoolean = false;
 
 
     public static CustomerShowFragment customerShowInstance(String[] customerStrings) {
@@ -57,13 +71,99 @@ public class CustomerShowFragment extends Fragment {
 //        Image Controller
         imageController();
 
+//        Upload Controller
+        uploadController();
+
+
     }   // Main Method
+
+    private void uploadController() {
+
+        ImageView imageView = getView().findViewById(R.id.imvUpload);
+        final String tag = "3JanV1";
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (statusABoolean) {
+
+                    try {
+
+                        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setTitle("Upload Image");
+                        progressDialog.setMessage("Please Wail few Minus ...");
+                        progressDialog.show();
+
+                        firebaseStorage = FirebaseStorage.getInstance();
+                        storageReference = firebaseStorage.getReference();
+
+                        Random random = new Random();
+                        int indexAInt = random.nextInt(100);
+                        String nameImageString = customerStrings[3] + "_" + Integer.toString(indexAInt);
+
+
+                        StorageReference reference = storageReference.child("Avata/" + nameImageString);
+                        reference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                progressDialog.dismiss();
+                                Toast.makeText(getActivity(), getString(R.string.message_upload_success),
+                                        Toast.LENGTH_SHORT).show();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                progressDialog.dismiss();
+                                MyAlert myAlert = new MyAlert(getActivity());
+                                myAlert.nomalDialog("Cannot Upload Image",
+                                        e.getMessage());
+
+                            }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                double processADouble = 100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount();
+                                int processAInt = (int) processADouble;
+
+                                progressDialog.setMessage("Upload ==> " + Integer.toString(processAInt) + " %");
+
+                            }
+                        });
+
+
+
+
+
+
+                    } catch (Exception e) {
+                        Log.d(tag, "e ==> " + e.toString());
+                    }
+
+                } else {
+
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.nomalDialog("Cannot Choose Image",
+                            getString(R.string.message_choose_image));
+
+                }
+
+            }
+        });
+
+    }   // uploadController
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == getActivity().RESULT_OK) {
+
+            statusABoolean = true;
 
             //Show Image
             try {

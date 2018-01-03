@@ -30,6 +30,7 @@ public class CustomerShowFragment extends Fragment {
     private String[] customerStrings;
     private Uri uri;
     private ImageView imageView;
+    private de.hdodenhof.circleimageview.CircleImageView circleImageView;
 
 
     public static CustomerShowFragment customerShowInstance(String[] customerStrings) {
@@ -70,7 +71,7 @@ public class CustomerShowFragment extends Fragment {
                 uri = data.getData();
                 Bitmap bitmap = BitmapFactory
                         .decodeStream(getActivity().getContentResolver().openInputStream(uri));
-                imageView.setImageBitmap(bitmap);
+                circleImageView.setImageBitmap(bitmap);
 
 
             } catch (Exception e) {
@@ -88,8 +89,8 @@ public class CustomerShowFragment extends Fragment {
 
     private void imageController() {
 
-        imageView = getView().findViewById(R.id.imvAvata);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        circleImageView = getView().findViewById(R.id.imvAvata);
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

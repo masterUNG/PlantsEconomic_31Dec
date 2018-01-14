@@ -14,10 +14,10 @@ import srongklod_bangtamruat.plantseconomic.utility.DrawerListViewAdapter;
 import srongklod_bangtamruat.plantseconomic.utility.MyConstant;
 
 /**
- * Created by masterung on 31/12/2017 AD.
+ * Created by masterung on 14/1/2018 AD.
  */
 
-public class DrawerMenuCustomerFragment extends Fragment{
+public class DrawerMenuSupplierFragment extends Fragment{
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -30,14 +30,14 @@ public class DrawerMenuCustomerFragment extends Fragment{
 
     private void createListView() {
 
-        ListView listView = getView().findViewById(R.id.listViewCustomDrawer);
+        ListView listView = getView().findViewById(R.id.listViewSupplierDrawer);
         MyConstant myConstant = new MyConstant();
 
 //        Icon
-        int[] ints = myConstant.getIconCustomerInts();
+        int[] ints = myConstant.getIconSupplierInts();
 
 //        Title
-        String[] strings = myConstant.getTitleCustomerStrings();
+        String[] strings = myConstant.getTitleSupplierStrings();
 
         DrawerListViewAdapter drawerListViewAdapter = new DrawerListViewAdapter(
                 getActivity(),
@@ -51,7 +51,7 @@ public class DrawerMenuCustomerFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_drawer_menu_customer, container, false);
+        View view = inflater.inflate(R.layout.fragment_drawer_menu_supplier, container, false);
         return view;
     }
 }

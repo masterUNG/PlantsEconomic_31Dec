@@ -23,6 +23,7 @@ import java.util.List;
 
 import srongklod_bangtamruat.plantseconomic.fragment.CustomerShowFragment;
 import srongklod_bangtamruat.plantseconomic.fragment.DrawerMenuCustomerFragment;
+import srongklod_bangtamruat.plantseconomic.fragment.DrawerMenuSupplierFragment;
 import srongklod_bangtamruat.plantseconomic.fragment.SupplierShowFragment;
 import srongklod_bangtamruat.plantseconomic.fragment.TransportShowFragment;
 import srongklod_bangtamruat.plantseconomic.utility.CustomerModel;
@@ -188,6 +189,8 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void findUserUidinSupplier() {
 
+        final String tag = "14JanV1";
+
         if (statusABoolean) {
 
             MyConstant myConstant = new MyConstant();
@@ -220,12 +223,25 @@ public class ServiceActivity extends AppCompatActivity {
                             supplyStrings[4] = supplierModel1.getHeadquartersString();
                             supplyStrings[5] = supplierModel1.getTelephoneString();
                             supplyStrings[6] = supplierModel1.getUidUserString();
+                            supplyStrings[7] = supplierModel1.getStatusString();
 
                             titleToolbarString = "Supplier";
                             subTitleToolbarString = supplyStrings[2];
 
+                            for (int i1=0; i1<supplyStrings.length; i1+=1) {
+                                Log.d(tag, "supplyStrings[" + i1 + "] ==> " + supplyStrings[i1]);
+                            }
+
                             createToolbar();
 
+//                            Add Drawer Menu
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .add(R.id.contentDrawerMenuFragment, new DrawerMenuSupplierFragment())
+                                    .commit();
+
+
+//                            Add Fragment
                             getSupportFragmentManager()
                                     .beginTransaction()
                                     .add(R.id.contentServiceFragment, SupplierShowFragment.supplierShowInstance(supplyStrings))
@@ -297,11 +313,13 @@ public class ServiceActivity extends AppCompatActivity {
 
                             createToolbar();
 
+//                            Add Memu for Drawer
                             getSupportFragmentManager().beginTransaction()
                                     .add(R.id.contentDrawerMenuFragment,
                                             new DrawerMenuCustomerFragment())
                                     .commit();
 
+//                            Add Content of Fragment
                             getSupportFragmentManager().beginTransaction()
                                     .add(R.id.contentServiceFragment,
                                             CustomerShowFragment.customerShowInstance(customerStrings))

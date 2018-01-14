@@ -16,6 +16,12 @@ public class MyConstant {
             R.drawable.icon_custom5,
             R.drawable.icon_custom6};
 
+    private int[] iconSupplierInts = new int[]{
+            R.drawable.icon_custom1,
+            R.drawable.icon_custom2,
+            R.drawable.icon_custom3,
+            R.drawable.icon_custom4};
+
     private String[] titleCustomerStrings = new String[]{
             "Home",
             "Add Friend",
@@ -23,6 +29,12 @@ public class MyConstant {
             "News",
             "Shop",
             "Chat"};
+
+    private String[] titleSupplierStrings = new String[]{
+            "Home",
+            "Message",
+            "News",
+            "Shop"};
 
 
     private String[] fieldCustomerStrings = new String[]{
@@ -38,7 +50,8 @@ public class MyConstant {
             "faxString",
             "headquartersString",
             "telephoneString",
-            "uidUserString"};
+            "uidUserString",
+            "statusString"};
 
     private String[] fieldTransportStrings = new String[]{
             "addressString",
@@ -49,6 +62,13 @@ public class MyConstant {
             "telephoneString",
             "uidUserString"};
 
+    public int[] getIconSupplierInts() {
+        return iconSupplierInts;
+    }
+
+    public String[] getTitleSupplierStrings() {
+        return titleSupplierStrings;
+    }
 
     public int[] getIconCustomerInts() {
         return iconCustomerInts;

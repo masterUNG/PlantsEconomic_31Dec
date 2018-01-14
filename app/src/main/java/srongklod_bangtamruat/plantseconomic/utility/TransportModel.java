@@ -7,10 +7,11 @@ import android.os.Parcelable;
  * Created by Administrator on 27/12/2560.
  */
 
-public class TransportModel implements Parcelable{
+public class TransportModel implements Parcelable {
 
-    private String uidUserString,companyString,
-    addressString,faxString,telephoneString,branchString,headquarterString;
+    private String uidUserString, companyString,
+            addressString, faxString, telephoneString,
+            branchString, headquarterString, statusString;
 
     public TransportModel() {
     }
@@ -21,7 +22,8 @@ public class TransportModel implements Parcelable{
                           String faxString,
                           String telephoneString,
                           String branchString,
-                          String headquarterString) {
+                          String headquarterString,
+                          String statusString) {
         this.uidUserString = uidUserString;
         this.companyString = companyString;
         this.addressString = addressString;
@@ -29,6 +31,7 @@ public class TransportModel implements Parcelable{
         this.telephoneString = telephoneString;
         this.branchString = branchString;
         this.headquarterString = headquarterString;
+        this.statusString = statusString;
     }
 
     protected TransportModel(Parcel in) {
@@ -39,6 +42,7 @@ public class TransportModel implements Parcelable{
         telephoneString = in.readString();
         branchString = in.readString();
         headquarterString = in.readString();
+        statusString = in.readString();
     }
 
     public static final Creator<TransportModel> CREATOR = new Creator<TransportModel>() {
@@ -52,6 +56,14 @@ public class TransportModel implements Parcelable{
             return new TransportModel[size];
         }
     };
+
+    public String getStatusString() {
+        return statusString;
+    }
+
+    public void setStatusString(String statusString) {
+        this.statusString = statusString;
+    }
 
     public String getUidUserString() {
         return uidUserString;

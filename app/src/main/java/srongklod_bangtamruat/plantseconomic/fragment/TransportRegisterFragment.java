@@ -171,7 +171,7 @@ public class TransportRegisterFragment extends Fragment {
                 faxString,
                 telephoneString,
                 branchString,
-                headquarterString);
+                headquarterString, "0");
 
         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest
                 .Builder().setDisplayName(companyString).build();

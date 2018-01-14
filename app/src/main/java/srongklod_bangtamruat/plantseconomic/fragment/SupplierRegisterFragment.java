@@ -37,7 +37,8 @@ public class SupplierRegisterFragment extends Fragment {
     //    Explicit
     private String companyString, addressString, faxString,
             telephoneString, businessString, emailString,
-            passwordString, headQuartersString,uidUserString;
+            passwordString, headQuartersString, uidUserString,
+            statusString; // 0 ==> Free, 1 ==> Wait, 2 ==> VIP
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
@@ -56,6 +57,7 @@ public class SupplierRegisterFragment extends Fragment {
     }
 
     private void saveController() {
+
         Button button = getView().findViewById(R.id.btnSaveSupplier);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,18 +100,33 @@ public class SupplierRegisterFragment extends Fragment {
 
     private void confirmValue() {
 
+        CharSequence[] charSequences = new CharSequence[]{"Free 4 Item", "VIP 100 Item"};
+        final boolean[] chooseBoolean = new boolean[] {false}; // false ==> Not Choose Status, True ==> Choosed
+        final String[] chooseStrings = new String[]{"0", "1"};
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.drawable.ic_action_upload);
         builder.setCancelable(false);
         builder.setTitle("please Confirm Value");
-        builder.setMessage("Company = "+companyString+"\n"+
-        "Address = "+addressString+"\n"+
-        "Fax = "+faxString+"\n"+
-        "Telephone = "+telephoneString+"\n"+
-        "Business = "+businessString+"\n"+
-        "Email = "+emailString+"\n"+
-        "Password = "+passwordString+"\n"+
-        "Head Quarters = "+headQuartersString);
+
+        builder.setMessage("Company = " + companyString + "\n" +
+                "Address = " + addressString + "\n" +
+                "Fax = " + faxString + "\n" +
+                "Telephone = " + telephoneString + "\n" +
+                "Business = " + businessString + "\n" +
+                "Email = " + emailString + "\n" +
+                "Password = " + passwordString + "\n" +
+                "Head Quarters = " + headQuartersString + "\n" + "\n" +
+                "Please Choose Status");
+
+        builder.setSingleChoiceItems(charSequences, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                statusString = chooseStrings[i];
+                chooseBoolean[0] = true;
+            }
+        });
 
         builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
             @Override
@@ -120,8 +137,21 @@ public class SupplierRegisterFragment extends Fragment {
         builder.setPositiveButton("Confrim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                uploadValueFirebase();
-                dialogInterface.dismiss();
+
+                if (chooseBoolean[0]) {
+                    //Choosed Status
+                    uploadValueFirebase();
+                    dialogInterface.dismiss();
+
+                } else {
+                    //Non Choose
+                    Toast.makeText(getActivity(), "Cannot Register Please Choose Status",
+                            Toast.LENGTH_LONG).show();
+                    dialogInterface.dismiss();
+
+                }
+
+
             }
 
 
@@ -140,7 +170,7 @@ public class SupplierRegisterFragment extends Fragment {
 
 //        UpDate Authentications
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.createUserWithEmailAndPassword(emailString,passwordString)
+        firebaseAuth.createUserWithEmailAndPassword(emailString, passwordString)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -152,7 +182,7 @@ public class SupplierRegisterFragment extends Fragment {
 //                            Register Error
                             String resultError = task.getException().getMessage();
                             MyAlert myAlert = new MyAlert(getActivity());
-                            myAlert.nomalDialog("Cannot Register",resultError);
+                            myAlert.nomalDialog("Cannot Register", resultError);
                         }
 
                     }//onComplete
@@ -174,8 +204,8 @@ public class SupplierRegisterFragment extends Fragment {
         Log.d(tag, "uid Current User ==>" + uidUserString);
 
 //        Set upModel
-        supplierModel = new SupplierModel(uidUserString,companyString,addressString,faxString
-        ,telephoneString,businessString,headQuartersString);
+        supplierModel = new SupplierModel(uidUserString, companyString, addressString, faxString
+                , telephoneString, businessString, headQuartersString);
 
         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest
                 .Builder()
@@ -195,7 +225,7 @@ public class SupplierRegisterFragment extends Fragment {
 
 
 //        For Authentication
-        Toast.makeText(getActivity(),"Register Success",
+        Toast.makeText(getActivity(), "Register Success",
                 Toast.LENGTH_SHORT).show();
 
         progressDialog.dismiss();
@@ -204,11 +234,11 @@ public class SupplierRegisterFragment extends Fragment {
     }
 
     private boolean checkSpace() {
-        return companyString.equals("")||addressString.equals("")||faxString.equals("")||
-                telephoneString.equals("")||
-                businessString.equals("")||
-                emailString.equals("")||
-                passwordString.equals("")||
+        return companyString.equals("") || addressString.equals("") || faxString.equals("") ||
+                telephoneString.equals("") ||
+                businessString.equals("") ||
+                emailString.equals("") ||
+                passwordString.equals("") ||
                 headQuartersString.equals("");
     }
 

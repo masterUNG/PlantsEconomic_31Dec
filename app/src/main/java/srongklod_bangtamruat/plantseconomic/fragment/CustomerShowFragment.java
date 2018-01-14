@@ -47,7 +47,7 @@ public class CustomerShowFragment extends Fragment {
     private StorageReference storageReference;
     private boolean statusABoolean = false;
 
-
+//    Receive Value from Fragment and Add to Argument
     public static CustomerShowFragment customerShowInstance(String[] customerStrings) {
 
         CustomerShowFragment customerShowFragment = new CustomerShowFragment();
@@ -83,10 +83,36 @@ public class CustomerShowFragment extends Fragment {
 
     private void showImage() {
 
-        String urlImage = "https://firebasestorage.googleapis.com/v0/b/plantseconomic.appspot.com/o/Avata%2FDBnbBV0EX0UmJSP6AlcJ5SMisHD3_30?alt=media&token=6c1f6cc8-a2e7-49e2-896d-6c27771e1e18";
+        final String tag = "3JanV2";
 
-        circleImageView = getView().findViewById(R.id.imvAvata);
-        Picasso.with(getActivity()).load(urlImage).into(circleImageView);
+        try {
+
+            FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+            StorageReference storageReference = firebaseStorage.getReference();
+
+            storageReference.child("Avata/EkBLMrnUyPUIr6IPSsLRbndivxk2_20.jpg")
+                    .getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Log.d(tag, "uri ==> " + uri.toString());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(tag, "e onFailure ==> " + e.toString());
+                }
+            });
+
+//            Fix Constant url of Image
+            String urlImage = "https://firebasestorage.googleapis.com/v0/b/plantseconomic.appspot.com/o/Avata%2FDBnbBV0EX0UmJSP6AlcJ5SMisHD3_30?alt=media&token=6c1f6cc8-a2e7-49e2-896d-6c27771e1e18";
+
+            circleImageView = getView().findViewById(R.id.imvAvata);
+            Picasso.with(getActivity()).load(urlImage).into(circleImageView);
+
+        } catch (Exception e) {
+            Log.d(tag, "e ==> " + e.toString());
+        }
 
     }
 
@@ -148,10 +174,6 @@ public class CustomerShowFragment extends Fragment {
 
                             }
                         });
-
-
-
-
 
 
                     } catch (Exception e) {

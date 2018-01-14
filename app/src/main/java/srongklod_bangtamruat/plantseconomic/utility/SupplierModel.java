@@ -7,10 +7,11 @@ import android.os.Parcelable;
  * Created by Administrator on 27/12/2560.
  */
 
-public class SupplierModel implements Parcelable{
+public class SupplierModel implements Parcelable {
 
-    private String uidUserString,companyString,addressString,faxString,telephoneString,
-    bussinessString, headquartersString;
+    private String uidUserString, companyString,
+            addressString, faxString, telephoneString,
+            bussinessString, headquartersString, statusString;
 
     public SupplierModel() {
     }
@@ -21,7 +22,8 @@ public class SupplierModel implements Parcelable{
                          String faxString,
                          String telephoneString,
                          String bussinessString,
-                         String headquartersString) {
+                         String headquartersString,
+                         String statusString) {
         this.uidUserString = uidUserString;
         this.companyString = companyString;
         this.addressString = addressString;
@@ -29,6 +31,7 @@ public class SupplierModel implements Parcelable{
         this.telephoneString = telephoneString;
         this.bussinessString = bussinessString;
         this.headquartersString = headquartersString;
+        this.statusString = statusString;
     }
 
     protected SupplierModel(Parcel in) {
@@ -39,6 +42,7 @@ public class SupplierModel implements Parcelable{
         telephoneString = in.readString();
         bussinessString = in.readString();
         headquartersString = in.readString();
+        statusString = in.readString();
     }
 
     public static final Creator<SupplierModel> CREATOR = new Creator<SupplierModel>() {
@@ -52,6 +56,14 @@ public class SupplierModel implements Parcelable{
             return new SupplierModel[size];
         }
     };
+
+    public String getStatusString() {
+        return statusString;
+    }
+
+    public void setStatusString(String statusString) {
+        this.statusString = statusString;
+    }
 
     public String getUidUserString() {
         return uidUserString;

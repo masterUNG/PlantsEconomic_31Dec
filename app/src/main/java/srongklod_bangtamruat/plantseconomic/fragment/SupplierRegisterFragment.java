@@ -183,7 +183,7 @@ public class SupplierRegisterFragment extends Fragment {
 
 //        Set upModel
         supplierModel = new SupplierModel(uidUserString, companyString, addressString, faxString
-                , telephoneString, businessString, headQuartersString);
+                , telephoneString, businessString, headQuartersString, "0");
 
         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest
                 .Builder()

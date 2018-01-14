@@ -154,6 +154,8 @@ public class ServiceActivity extends AppCompatActivity {
                             transportStrings[4] = transportModel1.getHeadquarterString();
                             transportStrings[5] = transportModel1.getTelephoneString();
                             transportStrings[6] = transportModel1.getUidUserString();
+                            transportStrings[7] = transportModel1.getStatusString();
+
 
                            for (int i1=0; i1<transportStrings.length; i1+=1) {
                                Log.d("31DecV1", "transportString[" + i1 + "] => " + transportStrings[i1]);

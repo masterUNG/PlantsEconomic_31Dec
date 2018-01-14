@@ -72,7 +72,8 @@ public class MyConstant {
             "faxString",
             "headquarterString",
             "telephoneString",
-            "uidUserString"};
+            "uidUserString",
+            "statusString"};
 
 
     public int[] getIconTransportInts() {

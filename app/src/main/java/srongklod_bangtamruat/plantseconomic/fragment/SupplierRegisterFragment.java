@@ -117,16 +117,12 @@ public class SupplierRegisterFragment extends Fragment {
                 "Business = " + businessString + "\n" +
                 "Email = " + emailString + "\n" +
                 "Password = " + passwordString + "\n" +
-                "Head Quarters = " + headQuartersString + "\n" + "\n" +
-                "Please Choose Status");
+                "Head Quarters = " + headQuartersString + "\n" + "\n");
 
-        builder.setSingleChoiceItems(charSequences, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                statusString = chooseStrings[i];
-                chooseBoolean[0] = true;
-            }
-        });
+        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.alert_choose_status, null);
+        builder.setView(view);
+
 
         builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
             @Override

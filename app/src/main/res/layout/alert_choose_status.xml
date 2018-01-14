@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="Please Choose Status"
+        android:textSize="@dimen/h2"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioButtonFree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Free for 4 Item" />
+
+        <RadioButton
+            android:id="@+id/radioButtonVIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIP for 100 Item" />
+
+    </RadioGroup>
+
+</LinearLayout>

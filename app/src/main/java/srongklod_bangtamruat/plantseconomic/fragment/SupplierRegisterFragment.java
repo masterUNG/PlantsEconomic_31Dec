@@ -100,10 +100,6 @@ public class SupplierRegisterFragment extends Fragment {
 
     private void confirmValue() {
 
-        CharSequence[] charSequences = new CharSequence[]{"Free 4 Item", "VIP 100 Item"};
-        final boolean[] chooseBoolean = new boolean[] {false}; // false ==> Not Choose Status, True ==> Choosed
-        final String[] chooseStrings = new String[]{"0", "1"};
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.drawable.ic_action_upload);
@@ -120,13 +116,6 @@ public class SupplierRegisterFragment extends Fragment {
                 "Head Quarters = " + headQuartersString + "\n" + "\n" +
                 "Please Choose Status");
 
-        builder.setSingleChoiceItems(charSequences, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                statusString = chooseStrings[i];
-                chooseBoolean[0] = true;
-            }
-        });
 
         builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
             @Override
@@ -138,21 +127,10 @@ public class SupplierRegisterFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                if (chooseBoolean[0]) {
-                    //Choosed Status
-                    uploadValueFirebase();
-                    dialogInterface.dismiss();
+                uploadValueFirebase();
+                dialogInterface.dismiss();
 
-                } else {
-                    //Non Choose
-                    Toast.makeText(getActivity(), "Cannot Register Please Choose Status",
-                            Toast.LENGTH_LONG).show();
-                    dialogInterface.dismiss();
-
-                }
-
-
-            }
+            }   // onClick
 
 
         });

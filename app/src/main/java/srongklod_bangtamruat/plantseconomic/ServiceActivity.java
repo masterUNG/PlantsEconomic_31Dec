@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -267,6 +268,15 @@ public class ServiceActivity extends AppCompatActivity {
                                     .add(R.id.contentDrawerMenuFragment, new DrawerMenuSupplierFragment())
                                     .commit();
 
+                            drawerLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Log.d("11FebV1", "Click Drawer");
+                                    drawerLayout.closeDrawers();
+                                }
+                            });
+
+
 
 //                            Add Fragment
                             getSupportFragmentManager()
@@ -383,6 +393,8 @@ public class ServiceActivity extends AppCompatActivity {
         Log.d(tag, "at Service userUid ==> " + userUidString);
         Log.d(tag, "disPlayName ==> " + disPlayName);
     }
+
+
 
 
 }   // Main Class

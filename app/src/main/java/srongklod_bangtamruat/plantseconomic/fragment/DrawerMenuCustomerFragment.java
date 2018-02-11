@@ -46,6 +46,8 @@ public class DrawerMenuCustomerFragment extends Fragment{
         listView.setAdapter(drawerListViewAdapter);
 
 
+
+
     }
 
     @Nullable

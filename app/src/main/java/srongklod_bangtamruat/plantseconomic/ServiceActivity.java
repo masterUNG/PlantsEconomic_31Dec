@@ -346,6 +346,11 @@ public class ServiceActivity extends AppCompatActivity {
                                             new DrawerMenuCustomerFragment())
                                     .commit();
 
+
+
+
+
+
 //                            Add Content of Fragment
                             getSupportFragmentManager().beginTransaction()
                                     .add(R.id.contentServiceFragment,

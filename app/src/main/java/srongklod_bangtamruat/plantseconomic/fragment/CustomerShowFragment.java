@@ -47,7 +47,7 @@ public class CustomerShowFragment extends Fragment {
     private StorageReference storageReference;
     private boolean statusABoolean = false;
 
-//    Receive Value from Fragment and Add to Argument
+    //    Receive Value from Fragment and Add to Argument
     public static CustomerShowFragment customerShowInstance(String[] customerStrings) {
 
         CustomerShowFragment customerShowFragment = new CustomerShowFragment();

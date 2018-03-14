@@ -164,7 +164,8 @@ public class CustomerRegisterFragment extends Fragment {
                 uidUserString,
                 nameString,
                 surNameString,
-                phoneString);
+                phoneString,
+                "avata.png");
 
         userProfileChangeRequest = new UserProfileChangeRequest
                 .Builder()

@@ -63,6 +63,8 @@ public class CustomerShowFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        circleImageView = getView().findViewById(R.id.imvAvata);
+
 //        Get Value From Activity
         getValueFromArgument();
 
@@ -84,18 +86,23 @@ public class CustomerShowFragment extends Fragment {
     private void showImage() {
 
         final String tag = "3JanV2";
+        String testImage = "9ecx9FHQ88fETh8NnEbxkyANflH2_51";
 
         try {
 
             FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
             StorageReference storageReference = firebaseStorage.getReference();
+            final String[] urlImage = new String[1];
 
-            storageReference.child("Avata/EkBLMrnUyPUIr6IPSsLRbndivxk2_20.jpg")
+            storageReference.child("Avata").child(testImage)
                     .getDownloadUrl()
                     .addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Log.d(tag, "uri ==> " + uri.toString());
+                            urlImage[0] = uri.toString();
+                            Log.d(tag, "uri ==> " + urlImage[0]);
+                            showCircleImage(urlImage[0]);
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -105,15 +112,19 @@ public class CustomerShowFragment extends Fragment {
             });
 
 //            Fix Constant url of Image
-            String urlImage = "https://firebasestorage.googleapis.com/v0/b/plantseconomic.appspot.com/o/Avata%2FDBnbBV0EX0UmJSP6AlcJ5SMisHD3_30?alt=media&token=6c1f6cc8-a2e7-49e2-896d-6c27771e1e18";
+            //String urlImage = "https://firebasestorage.googleapis.com/v0/b/plantseconomic.appspot.com/o/Avata%2FDBnbBV0EX0UmJSP6AlcJ5SMisHD3_30?alt=media&token=6c1f6cc8-a2e7-49e2-896d-6c27771e1e18";
 
-            circleImageView = getView().findViewById(R.id.imvAvata);
-            Picasso.with(getActivity()).load(urlImage).into(circleImageView);
+
 
         } catch (Exception e) {
             Log.d(tag, "e ==> " + e.toString());
         }
 
+    }
+
+    private void showCircleImage(String urlImage) {
+
+        Picasso.with(getActivity()).load(urlImage).into(circleImageView);
     }
 
     private void uploadController() {

@@ -21,6 +21,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!--Avata-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imvAvata"
+                    android:src="@drawable/avata"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="@dimen/avata"
+                    android:layout_height="@dimen/avata" />
+
                 <!--Name-->
                 <LinearLayout
                     android:orientation="horizontal"
@@ -35,7 +44,7 @@
                         android:layout_height="wrap_content" />
                     <!--textField-->
                     <EditText
-                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textColorHint="@color/colorPrimary"
                         android:textSize="@dimen/h2"
                         android:id="@+id/edtName"
                         android:inputType="text"
@@ -59,7 +68,7 @@
                         android:layout_height="wrap_content" />
                     <!--textField-->
                     <EditText
-                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textColorHint="@color/colorPrimary"
                         android:textSize="@dimen/h2"
                         android:id="@+id/edtSurname"
                         android:inputType="text"
@@ -83,7 +92,7 @@
                         android:layout_height="wrap_content" />
                     <!--textField-->
                     <EditText
-                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textColorHint="@color/colorPrimary"
                         android:textSize="@dimen/h2"
                         android:id="@+id/edtEmail"
                         android:inputType="textEmailAddress"
@@ -108,7 +117,7 @@
                     <!--textField-->
                     <EditText
                         android:textSize="@dimen/h2"
-                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textColorHint="@color/colorPrimary"
                         android:id="@+id/edtPassword"
                         android:inputType="textPassword"
                         android:hint="@string/password"
@@ -132,7 +141,7 @@
                     <!--textField-->
                     <EditText
                         android:textSize="@dimen/h2"
-                        android:textColorHint="@color/colorPrimaryLight"
+                        android:textColorHint="@color/colorPrimary"
                         android:id="@+id/edtPhone"
                         android:inputType="phone"
                         android:hint="@string/phone_66812345678"

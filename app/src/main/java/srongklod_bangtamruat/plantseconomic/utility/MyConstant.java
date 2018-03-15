@@ -53,7 +53,8 @@ public class MyConstant {
             "lastNameString",
             "nameString",
             "phoneString",
-            "uidUserString"};
+            "uidUserString",
+            "avataString"};
 
     private String[] fieldSupplierStrings = new String[]{
             "addressString",

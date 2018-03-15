@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +29,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import srongklod_bangtamruat.plantseconomic.R;
@@ -50,6 +56,7 @@ public class CustomerRegisterFragment extends Fragment {
     private ProgressDialog progressDialog;
     private CircleImageView circleImageView;
     private Uri uri;
+    private boolean circleImageABoolean = true;
 
 
     @Override
@@ -72,6 +79,7 @@ public class CustomerRegisterFragment extends Fragment {
         if (resultCode == getActivity().RESULT_OK) {
 
             uri = data.getData();
+            circleImageABoolean = false;
 
 //            Setup Image to CircleImageView
             try {
@@ -101,15 +109,18 @@ public class CustomerRegisterFragment extends Fragment {
 
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "Please Choose App"), 1);
+                startActivityForResult(Intent.createChooser(intent,
+                        "Please Choose App"), 1);
 
             }
         });
     }
 
     private void saveController() {
+
         Button button = getView().findViewById(R.id.btnSaveCustomer);
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -133,8 +144,12 @@ public class CustomerRegisterFragment extends Fragment {
                     MyAlert myAlert = new MyAlert(getActivity());
                     myAlert.nomalDialog(getResources().getString(R.string.title_have_space),
                             getResources().getString(R.string.massage_have_space));
+                } else if (circleImageABoolean) {
+//                    Non Choose Image
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.nomalDialog(getResources().getString(R.string.title_choose_image),
+                            getResources().getString(R.string.message_choose_image));
                 } else {
-//                    NO Space
                     confirmValue();
                 }
 
@@ -193,7 +208,7 @@ public class CustomerRegisterFragment extends Fragment {
 //                            Something Error
                             String resultError = task.getException().getMessage();
                             MyAlert myAlert = new MyAlert(getActivity());
-                            myAlert.nomalDialog("Cannot Register", resultError);
+                            myAlert.nomalDialog(getString(R.string.title_cannot_register), resultError);
 
                         }
 
@@ -204,12 +219,41 @@ public class CustomerRegisterFragment extends Fragment {
 
     private void registerSuccess() {
 
-        final String tag = "27DecV1";
+        final String tag = "15MarchV1";
 
 //        Find uid of Current User
         firebaseUser = firebaseAuth.getCurrentUser();
         uidUserString = firebaseUser.getUid();
-        Log.d(tag, "uid User ==> " + uidUserString);
+        Log.d(tag, "uidUserString from getCurrentUser ==> " + uidUserString);
+
+//        Create Name of Image
+        Random random = new Random();
+        int i = random.nextInt(1000);
+        String nameImageString = uidUserString + "_" + Integer.toString(i);
+        Log.d(tag, "nameImageString ==> " + nameImageString);
+
+//        Upload Image to Firebase
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+
+        StorageReference storageReference1 = storageReference.child("Avata/" + nameImageString);
+
+        storageReference1.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(tag, "e onFailure ==> " + e.toString());
+            }
+        });
+
+
+
+
 
 //        Setup Model
         customerModel = new CustomerModel(
@@ -217,7 +261,7 @@ public class CustomerRegisterFragment extends Fragment {
                 nameString,
                 surNameString,
                 phoneString,
-                "avata.png");
+                nameImageString);
 
         userProfileChangeRequest = new UserProfileChangeRequest
                 .Builder()
@@ -237,14 +281,18 @@ public class CustomerRegisterFragment extends Fragment {
             }
         });
 
+        progressDialog.dismiss();
 
         Toast.makeText(getActivity(), "Register Success",
                 Toast.LENGTH_SHORT).show();
-        progressDialog.dismiss();
 
 
         getActivity().getSupportFragmentManager().popBackStack();
-    }
+
+
+
+
+    }   // reisterSuccess
 
     private boolean checkSpace() {
         return nameString.equals("")

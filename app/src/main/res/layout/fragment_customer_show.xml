@@ -5,108 +5,11 @@
     android:layout_height="match_parent">
 
     <!--Content Customer-->
-    <LinearLayout
-        android:padding="@dimen/padding"
-        android:layout_margin="@dimen/margin"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!--Avata-->
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imvAvata"
-            android:src="@drawable/avata"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="@dimen/avata"
-            android:layout_height="@dimen/avata" />
-        <ImageView
-            android:id="@+id/imvUpload"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_action_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!--Name-->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--Icon-->
-            <ImageView
-                android:src="@drawable/ic_action_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!--Text-->
-            <TextView
-                android:id="@+id/txtName"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_marginLeft="@dimen/padding"
-                android:layout_gravity="center_vertical"
-                android:text="Name"
-                android:textSize="@dimen/h2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <!--LastName-->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--Icon-->
-            <ImageView
-                android:src="@drawable/ic_action_lastname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!--Text-->
-            <TextView
-                android:id="@+id/txtLastName"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_marginLeft="@dimen/padding"
-                android:layout_gravity="center_vertical"
-                android:text="LastName"
-                android:textSize="@dimen/h2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-        <!--Phone-->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--Icon-->
-            <ImageView
-                android:src="@drawable/ic_action_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <!--Text-->
-            <TextView
-                android:id="@+id/txtPhone"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_marginLeft="@dimen/padding"
-                android:layout_gravity="center_vertical"
-                android:text="123456"
-                android:textSize="@dimen/h2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    <TextView
+        android:textSize="@dimen/h1"
+        android:text="Show TimeLine Friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

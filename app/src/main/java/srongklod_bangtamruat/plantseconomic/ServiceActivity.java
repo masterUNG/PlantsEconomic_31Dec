@@ -351,15 +351,10 @@ public class ServiceActivity extends AppCompatActivity {
 
                             createToolbar();
 
-//                            Add Memu for Drawer
+//                            Add Menu for Drawer
                             getSupportFragmentManager().beginTransaction()
-                                    .add(R.id.contentDrawerMenuFragment,
-                                            new DrawerMenuCustomerFragment())
+                                    .add(R.id.contentDrawerMenuFragment, DrawerMenuCustomerFragment.drawerMenuCustomerInstance(customerStrings))
                                     .commit();
-
-
-
-
 
 
 //                            Add Content of Fragment

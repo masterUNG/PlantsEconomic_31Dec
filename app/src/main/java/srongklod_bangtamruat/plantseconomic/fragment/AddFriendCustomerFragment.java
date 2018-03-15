@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,7 +50,19 @@ public class AddFriendCustomerFragment extends Fragment{
         readAllChildCustomer();
 
 
+
+
     }   // Main Method
+
+    private void createListView() {
+
+        ListView listView = getView().findViewById(R.id.listViewAddFriend);
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, displayStringArrayList);
+        listView.setAdapter(stringArrayAdapter);
+
+    }
 
     private ArrayList<String> collectItem(Map<String, Object> objectMap, String childString) {
 
@@ -122,6 +136,8 @@ public class AddFriendCustomerFragment extends Fragment{
                 avataStringArrayList = collectItem((Map<String, Object>) dataSnapshot.getValue(), "avataString");
                 Log.d(tag, "avataStringArrayList ==> " + avataStringArrayList.toString());
 
+                //        Create ListView
+                createListView();
 
             }   // onDataChange
 
@@ -135,7 +151,7 @@ public class AddFriendCustomerFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_friend_customer, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_friend, container, false);
         return view;
     }
 }

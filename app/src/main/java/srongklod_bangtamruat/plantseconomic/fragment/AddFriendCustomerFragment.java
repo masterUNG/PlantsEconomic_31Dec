@@ -28,14 +28,13 @@ import srongklod_bangtamruat.plantseconomic.R;
  * Created by masterung on 11/2/2018 AD.
  */
 
-public class AddFriendCustomerFragment extends Fragment{
+public class AddFriendCustomerFragment extends Fragment {
 
     //    Explicit
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private String uidLoginString, displayString;
     private ArrayList<String> uidStringArrayList, displayStringArrayList, avataStringArrayList;
-
 
 
     @Override
@@ -48,8 +47,6 @@ public class AddFriendCustomerFragment extends Fragment{
 
 //        Read All Child Customer
         readAllChildCustomer();
-
-
 
 
     }   // Main Method

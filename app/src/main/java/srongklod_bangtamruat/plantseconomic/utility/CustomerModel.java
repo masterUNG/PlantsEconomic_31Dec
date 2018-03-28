@@ -10,17 +10,22 @@ import android.os.Parcelable;
 
 public class CustomerModel implements Parcelable{
 
-    private String uidUserString, nameString, lastNameString, phoneString, avataString;
+    private String uidUserString, nameString,
+            lastNameString, phoneString,
+            avataString, urlImageString;
 
     public CustomerModel() {
     }
 
-    public CustomerModel(String uidUserString, String nameString, String lastNameString, String phoneString, String avataString) {
+    public CustomerModel(String uidUserString, String nameString,
+                         String lastNameString, String phoneString,
+                         String avataString, String urlImageString) {
         this.uidUserString = uidUserString;
         this.nameString = nameString;
         this.lastNameString = lastNameString;
         this.phoneString = phoneString;
         this.avataString = avataString;
+        this.urlImageString = urlImageString;
     }
 
     protected CustomerModel(Parcel in) {
@@ -29,6 +34,7 @@ public class CustomerModel implements Parcelable{
         lastNameString = in.readString();
         phoneString = in.readString();
         avataString = in.readString();
+        urlImageString = in.readString();
     }
 
     public static final Creator<CustomerModel> CREATOR = new Creator<CustomerModel>() {
@@ -83,6 +89,14 @@ public class CustomerModel implements Parcelable{
         this.avataString = avataString;
     }
 
+    public String getUrlImageString() {
+        return urlImageString;
+    }
+
+    public void setUrlImageString(String urlImageString) {
+        this.urlImageString = urlImageString;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -95,5 +109,6 @@ public class CustomerModel implements Parcelable{
         dest.writeString(lastNameString);
         dest.writeString(phoneString);
         dest.writeString(avataString);
+        dest.writeString(urlImageString);
     }
 }   // Main Class

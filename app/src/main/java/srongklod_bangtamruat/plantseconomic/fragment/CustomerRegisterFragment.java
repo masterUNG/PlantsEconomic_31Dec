@@ -284,42 +284,15 @@ public class CustomerRegisterFragment extends Fragment {
         uidUserString = firebaseUser.getUid();
         Log.d(tag, "uidUserString from getCurrentUser ==> " + uidUserString);
 
-//        Create Name of Image
-        Random random = new Random();
-        int i = random.nextInt(1000);
-        String nameImageString = uidUserString + "_" + Integer.toString(i);
-        Log.d(tag, "nameImageString ==> " + nameImageString);
-
-//        Upload Image to Firebase
-        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
-        StorageReference storageReference = firebaseStorage.getReference();
-
-        StorageReference storageReference1 = storageReference.child("Avata/" + nameImageString);
-
-        storageReference1.putFile(uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(tag, "e onFailure ==> " + e.toString());
-            }
-        });
-
-
-
-
-
 //        Setup Model
         customerModel = new CustomerModel(
                 uidUserString,
                 nameString,
                 surNameString,
                 phoneString,
-                nameImageString);
+                nameImageString,
+                urlImageString);
+
 
         userProfileChangeRequest = new UserProfileChangeRequest
                 .Builder()

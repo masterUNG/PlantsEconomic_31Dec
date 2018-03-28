@@ -26,15 +26,7 @@ public class DrawerMenuCustomerFragment extends Fragment{
 
     private String[] loginStrings;
 
-    public static DrawerMenuCustomerFragment drawerMenuCustomerInstance(String[] loginStrings) {
 
-        DrawerMenuCustomerFragment drawerMenuCustomerFragment = new DrawerMenuCustomerFragment();
-        Bundle bundle = new Bundle();
-        bundle.putStringArray("Login", loginStrings);
-        drawerMenuCustomerFragment.setArguments(bundle);
-        return drawerMenuCustomerFragment;
-
-    }
 
 
 
@@ -42,8 +34,7 @@ public class DrawerMenuCustomerFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        Get Value From Argument
-        loginStrings = getArguments().getStringArray("Login");
+
 
 
 //        Create ListView
@@ -78,7 +69,7 @@ public class DrawerMenuCustomerFragment extends Fragment{
 
                         getActivity().getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.contentServiceFragment, CustomerShowFragment.customerShowInstance(loginStrings))
+                                .replace(R.id.contentServiceFragment, new CustomerShowFragment())
                                 .commit();
 
                         break;
@@ -93,11 +84,9 @@ public class DrawerMenuCustomerFragment extends Fragment{
 
                 }   // switch
 
-//                DrawerLayout drawerLayout = getView().findViewById(R.id.drawerLayoutService);
-//                drawerLayout.closeDrawer(GravityCompat.START);
+                ((ServiceActivity)getActivity()).myCloseDrawer();
 
-
-            }
+            }   // onItemClick
         });
 
 

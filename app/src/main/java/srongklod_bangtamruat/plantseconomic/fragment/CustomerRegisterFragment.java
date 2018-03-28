@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Random;
 
@@ -47,7 +49,8 @@ import srongklod_bangtamruat.plantseconomic.utility.MyAlert;
 public class CustomerRegisterFragment extends Fragment {
     //    Explicit
     private String nameString, surNameString, emailString,
-            passwordString, phoneString, uidUserString;
+            passwordString, phoneString, uidUserString,
+            urlImageString, nameImageString;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private CustomerModel customerModel;
@@ -150,7 +153,9 @@ public class CustomerRegisterFragment extends Fragment {
                     myAlert.nomalDialog(getResources().getString(R.string.title_choose_image),
                             getResources().getString(R.string.message_choose_image));
                 } else {
-                    confirmValue();
+
+                    uploadImageToFirebase();
+
                 }
 
 
@@ -159,12 +164,41 @@ public class CustomerRegisterFragment extends Fragment {
 
     }
 
+    private void uploadImageToFirebase() {
+
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        nameImageString = nameString + "-" + surNameString + "-" + "0";
+
+        StorageReference storageReference1 = storageReference.child("AvataCustomer/" + nameImageString);
+
+        storageReference1.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d("28MarchV1", "onSuccess Work");
+                findPathImage();
+            }
+        });
+
+
+    }   // uploadImageToFirebase
+
     private void confirmValue() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(R.drawable.ic_action_upload);
         builder.setCancelable(false);
         builder.setTitle("please Confirm Value");
+
+        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.alert_register, null);
+        builder.setView(view);
+
+        ImageView imageView = view.findViewById(R.id.imvShowAvata);
+        Log.d("28MarchV1", "Path Url ==> " + urlImageString);
+        Picasso.with(getActivity()).load(urlImageString).into(imageView);
+
+
         builder.setMessage("Name = " + nameString + "\n" +
                 "Surname = " + surNameString + "\n" +
                 "Email = " + emailString + "\n" +
@@ -186,6 +220,30 @@ public class CustomerRegisterFragment extends Fragment {
         builder.show();
 
     }//ConfirmValue
+
+    private void findPathImage() {
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        final String[] strings = new String[1];
+
+        storageReference.child("AvataCustomer/" + nameImageString)
+                .getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        strings[0] = uri.toString();
+                        Log.d("28MarchV1", "Uri Image ==> " + strings[0]);
+                        urlImageString = strings[0];
+                        confirmValue();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("28MarchV1", "e False ==> " + e.toString());
+                    }
+                });
+    }
 
     private void uploadValueFirebase() {
 

@@ -26,7 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +39,7 @@ import srongklod_bangtamruat.plantseconomic.utility.AddFriendAdapter;
 import srongklod_bangtamruat.plantseconomic.utility.CustomerModel;
 import srongklod_bangtamruat.plantseconomic.utility.MyAlert;
 import srongklod_bangtamruat.plantseconomic.utility.MyChangeArrayListToArray;
+import srongklod_bangtamruat.plantseconomic.utility.PostModel;
 
 /**
  * Created by masterung on 11/2/2018 AD.
@@ -190,9 +194,24 @@ public class AddFriendCustomerFragment extends Fragment {
 
         } else {
 //            Precess Add Friend
+            Calendar calendar = Calendar.getInstance();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            String dateTimeString = dateFormat.format(calendar.getTime());
+            String postSting = "Start Add Friend";
+
+            PostModel postModel = new PostModel(dateTimeString, postSting);
+
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = firebaseDatabase.getReference()
+                    .child("FriendCustomer").child("Friend-" + loginStrings[3]);
+
+            databaseReference.child(uidFriendString).setValue(postModel);
 
 
-        }
+
+
+
+        }   // if
 
 
     }   // updateFriend

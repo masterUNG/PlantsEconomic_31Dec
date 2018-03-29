@@ -193,6 +193,7 @@ public class AddFriendCustomerFragment extends Fragment {
             myAlert.nomalDialog("Choose My Salfe", "Please Choose Another Friend");
 
         } else {
+
 //            Precess Add Friend
             Calendar calendar = Calendar.getInstance();
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -206,6 +207,11 @@ public class AddFriendCustomerFragment extends Fragment {
                     .child("FriendCustomer").child("Friend-" + loginStrings[3]);
 
             databaseReference.child(uidFriendString).setValue(postModel);
+
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contentServiceFragment, new CustomerShowFragment())
+                    .commit();
 
 
 

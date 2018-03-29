@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Avata-->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imvAvata"
+        android:layout_margin="@dimen/margin"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/avata"
+        android:layout_height="@dimen/avata" />
+
+    <!--Name and Surname-->
+    <LinearLayout
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--Name-->
+        <TextView
+            android:id="@+id/txtName"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="@dimen/h1"
+            android:text="Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+
+        <!--Surname-->
+        <TextView
+            android:layout_marginLeft="@dimen/margin"
+            android:id="@+id/txtSurName"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="@dimen/h1"
+            android:text="SurName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <!--Position-->
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/txtPosition"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:textSize="@dimen/h1"
+        android:text="Position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

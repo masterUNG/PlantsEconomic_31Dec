@@ -3,21 +3,25 @@ package srongklod_bangtamruat.plantseconomic.utility;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class PostModel implements Parcelable {
+public class PostModel implements Parcelable{
 
-    private String dataTimeString, postString;
+    private String dataTimeString, postString, uidFriendString;
 
     public PostModel() {
     }
 
-    public PostModel(String dataTimeString, String postString) {
+    public PostModel(String dataTimeString,
+                     String postString,
+                     String uidFriendString) {
         this.dataTimeString = dataTimeString;
         this.postString = postString;
+        this.uidFriendString = uidFriendString;
     }
 
     protected PostModel(Parcel in) {
         dataTimeString = in.readString();
         postString = in.readString();
+        uidFriendString = in.readString();
     }
 
     public static final Creator<PostModel> CREATOR = new Creator<PostModel>() {
@@ -48,6 +52,14 @@ public class PostModel implements Parcelable {
         this.postString = postString;
     }
 
+    public String getUidFriendString() {
+        return uidFriendString;
+    }
+
+    public void setUidFriendString(String uidFriendString) {
+        this.uidFriendString = uidFriendString;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -57,5 +69,6 @@ public class PostModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(dataTimeString);
         dest.writeString(postString);
+        dest.writeString(uidFriendString);
     }
 }   // Main Class

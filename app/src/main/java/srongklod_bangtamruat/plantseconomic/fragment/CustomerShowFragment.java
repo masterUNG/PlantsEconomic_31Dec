@@ -106,16 +106,24 @@ public class CustomerShowFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    PostModel postModel = dataSnapshot1.getValue(PostModel.class);
-                    list.add(postModel);
+                    try {
 
-                    PostModel postModel1 = (PostModel) list.get(countInts[0]);
-                    String uidFriend = postModel1.getUidFriendString();
-                    Log.d("29MarchV3", "uidFriend ==> " + uidFriend);
+                        PostModel postModel = dataSnapshot1.getValue(PostModel.class);
+                        list.add(postModel);
 
-                    findNameSurnameImage(uidFriend);
+                        PostModel postModel1 = (PostModel) list.get(countInts[0]);
+                        String uidFriend = postModel1.getUidFriendString();
+                        Log.d("29MarchV3", "uidFriend ==> " + uidFriend);
 
-                    countInts[0] += 1;
+                        findNameSurnameImage(uidFriend);
+
+                        countInts[0] += 1;
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
                 }   // for
 
 

@@ -98,6 +98,7 @@ public class CustomerShowFragment extends Fragment {
 
                 int i = (int) dataSnapshot.getChildrenCount();
                 amountFriendAnInt = i;
+                Log.d("4AprilV4", "amountFriend ==> " + amountFriendAnInt);
                 List list = new ArrayList();
 
                 nameFrinedStrings = new String[i];
@@ -113,7 +114,7 @@ public class CustomerShowFragment extends Fragment {
 
                         PostModel postModel1 = (PostModel) list.get(countInts[0]);
                         String uidFriend = postModel1.getUidFriendString();
-                        Log.d("29MarchV3", "uidFriend ==> " + uidFriend);
+                        Log.d("4AprilV4", "uidFriend on Model ==> " + uidFriend);
 
                         findNameSurnameImage(uidFriend);
 
@@ -138,7 +139,7 @@ public class CustomerShowFragment extends Fragment {
 
     }   // createListFriend
 
-    private void findNameSurnameImage(String uidFriend) {
+    private void findNameSurnameImage(final String uidFriend) {
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference()
@@ -172,11 +173,11 @@ public class CustomerShowFragment extends Fragment {
                 if (timesAnInt < amountFriendAnInt) {
 
                     for (int i = 0; i < showNameStrings.length; i += 1) {
-                        Log.d("4AprilV2", "Name[" + i + "] ==> " + showNameStrings[i]);
-                        Log.d("4AprilV2", "SurName[" + i + "] ==> " + showSurnameStrings[i]);
-                        Log.d("4AprilV2", "Image[" + i + "] ==> " + showImageStrings[i]);
+                        Log.d("4AprilV5", "Name[" + i + "] ==> " + showNameStrings[i]);
+                        Log.d("4AprilV5", "SurName[" + i + "] ==> " + showSurnameStrings[i]);
+                        Log.d("4AprilV5", "Image[" + i + "] ==> " + showImageStrings[i]);
 
-                        showMessageStrings[i] = "Test Message";
+                        showMessageStrings[i] = findMessage(uidFriend.trim());
                         showDateStrings[i] = "4-04-2018 09:56";
 
                     }
@@ -188,9 +189,6 @@ public class CustomerShowFragment extends Fragment {
                     listView.setAdapter(showTimeLineAdapter);
 
 
-
-
-                } else {
                     timesAnInt += 1;
                 }
 
@@ -203,6 +201,14 @@ public class CustomerShowFragment extends Fragment {
             }
         });
 
+    }   // findName
+
+    private String findMessage(String uidFriendString) {
+
+        Log.d("4AprilV4", "uidFriend ==> " + uidFriendString);
+
+
+        return null;
     }
 
 

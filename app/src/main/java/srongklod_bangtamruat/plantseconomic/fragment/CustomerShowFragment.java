@@ -180,7 +180,8 @@ public class CustomerShowFragment extends Fragment {
                         showMessageStrings[i] = findMessage(uidFriend.trim());
                         showDateStrings[i] = "4-04-2018 09:56";
 
-                    }
+                        timesAnInt += 1;
+                    }   // for
 
                     ListView listView = getView().findViewById(R.id.listViewShowFriend);
                     ShowTimeLineAdapter showTimeLineAdapter = new ShowTimeLineAdapter(getActivity(),
@@ -189,8 +190,8 @@ public class CustomerShowFragment extends Fragment {
                     listView.setAdapter(showTimeLineAdapter);
 
 
-                    timesAnInt += 1;
-                }
+
+                } //if
 
 
             }

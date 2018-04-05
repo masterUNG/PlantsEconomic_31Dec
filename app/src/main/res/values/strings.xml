@@ -29,6 +29,8 @@
     <string name="message_choose_image">Please Choose App For Choose Image</string>
     <string name="message_upload_success">Thank You Upload Image Success</string>
     <string name="title_cannot_register">Cannot Register</string>
+    <string name="description">Description :</string>
+    <string name="stock">Stock :</string>
 
 
 </resources>

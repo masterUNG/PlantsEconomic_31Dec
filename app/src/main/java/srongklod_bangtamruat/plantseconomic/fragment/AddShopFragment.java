@@ -1,5 +1,6 @@
 package srongklod_bangtamruat.plantseconomic.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,11 +16,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -28,6 +34,7 @@ import java.util.Random;
 
 import srongklod_bangtamruat.plantseconomic.R;
 import srongklod_bangtamruat.plantseconomic.utility.MyAlert;
+import srongklod_bangtamruat.plantseconomic.utility.ShopModel;
 
 public class AddShopFragment extends Fragment {
 
@@ -35,7 +42,9 @@ public class AddShopFragment extends Fragment {
     private ImageView imageView;
     private Uri uri;
     private String nameString, descriptionString, priceString,
-            stockString, displayString, uidLoginString;
+            stockString, displayString, uidLoginString,
+            nameImageString, urlImageString;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -70,6 +79,11 @@ public class AddShopFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle("Please Wait ...");
+                progressDialog.setMessage("Few In Minus Continuous Update Data");
+                progressDialog.show();
+
                 EditText nameEditText = getView().findViewById(R.id.edtName);
                 EditText descriptionEditText = getView().findViewById(R.id.edtDescription);
                 EditText priceEditText = getView().findViewById(R.id.edtPrice);
@@ -85,9 +99,11 @@ public class AddShopFragment extends Fragment {
                 if (aBoolean) {
                     myAlert.nomalDialog(getString(R.string.title_choose_image),
                             getString(R.string.message_choose_image));
+                    progressDialog.dismiss();
                 } else if (checkSpace()) {
                     myAlert.nomalDialog(getString(R.string.title_have_space),
                             getString(R.string.massage_have_space));
+                    progressDialog.dismiss();
                 } else {
 
 //                    UploadImage
@@ -95,15 +111,18 @@ public class AddShopFragment extends Fragment {
                     Random random = new Random();
                     int i = random.nextInt(10000);
 
+                    nameImageString = uidLoginString + "-" + Integer.toString(i);
+
                     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
                     StorageReference storageReference = firebaseStorage.getReference()
-                            .child("ShopSupplier/" + uidLoginString + "-" + Integer.toString(i));
+                            .child("ShopSupplier/" + nameImageString);
 
                     storageReference.putFile(uri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     Log.d("5AprilV1", "Upload Image Success");
+                                    findMyImagePath();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -117,6 +136,61 @@ public class AddShopFragment extends Fragment {
 
             }
         });
+    }
+
+    private void findMyImagePath() {
+
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        final String[] strings = new String[1];
+
+        storageReference.child("ShopSupplier/" + nameImageString)
+                .getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        strings[0] = uri.toString();
+                        urlImageString = strings[0];
+                        Log.d("5AprilV1", "url ==> " + urlImageString);
+                        updateNewProductToShop();
+                    }
+                });
+
+    }
+
+    private void updateNewProductToShop() {
+
+        Log.d("5AprilV2", "NameProduce ==> " + nameString);
+        Log.d("5AprilV2", "Description ==> " + descriptionString);
+        Log.d("5AprilV2", "Price ==> " + priceString);
+        Log.d("5AprilV2", "Stock ==> " + stockString);
+        Log.d("5AprilV2", "Url Path ==> " + urlImageString);
+
+        ShopModel shopModel = new ShopModel(nameString, descriptionString,
+                priceString, stockString, urlImageString);
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference()
+                .child("ShopSupplier").child("Shop-" + uidLoginString);
+        databaseReference.child(nameImageString).setValue(shopModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    progressDialog.dismiss();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.contentServiceFragment, new ShopSuppliesFragment())
+                            .commit();
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), "Please Try Again Cannot Upload",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
     }
 
     private boolean checkSpace() {

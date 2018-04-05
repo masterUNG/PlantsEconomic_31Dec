@@ -76,14 +76,14 @@ public class ShopSuppliesFragment extends Fragment {
                     list.add(shopModel);
 
                     ShopModel shopModel1 = (ShopModel) list.get(countInts[0]);
-                    Log.d("5AprilV3", "NameProduce[" + countInts[0] + "] ==> " + shopModel1.getNameProduceString());
+                    Log.d("5AprilV3", "NameProduce[" + countInts[0] + "] ==> " +
+                            shopModel1.getNameProduceString());
 
                     nameStrings[countInts[0]] = shopModel1.getNameProduceString();
                     descriptionStrings[countInts[0]] = shopModel1.getDescreptionString();
                     priceStrings[countInts[0]] = shopModel1.getPriceString();
                     stockStrings[countInts[0]] = shopModel1.getStockString();
                     urlPathStrings[countInts[0]] = shopModel1.getUrlImagePathString();
-
 
                     countInts[0] += 1;
                 }   // for

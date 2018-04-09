@@ -41,6 +41,9 @@ public class MainFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        Check Status Login
+        checkStatusLogin();
+
 //        Register Control
         registerControll();
 
@@ -48,6 +51,13 @@ public class MainFragment extends Fragment{
         signInController();
 
     }//Main Method
+
+    private void checkStatusLogin() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            intentToService();
+        }
+    }
 
     @Override
     public void onResume() {
@@ -122,9 +132,7 @@ public class MainFragment extends Fragment{
                             Log.d("30DecV1", "uidString ==> " + uidString);
 
 //                            Intent to ServiceActivity
-                            Intent intent = new Intent(getActivity(), ServiceActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
+                            intentToService();
 
                         } else {
 
@@ -141,6 +149,12 @@ public class MainFragment extends Fragment{
 
 
 
+    }
+
+    private void intentToService() {
+        Intent intent = new Intent(getActivity(), ServiceActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void registerControll() {

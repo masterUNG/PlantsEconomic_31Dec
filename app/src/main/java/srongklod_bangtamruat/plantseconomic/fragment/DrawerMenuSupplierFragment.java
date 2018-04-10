@@ -62,6 +62,10 @@ public class DrawerMenuSupplierFragment extends Fragment {
 
                         break;
                     case 1:
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.contentServiceFragment, new MessageSupplierFragment())
+                                .commit();
 //                        Message
 
                         break;

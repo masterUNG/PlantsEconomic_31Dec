@@ -33,11 +33,14 @@ public class ShopSuppliesFragment extends Fragment {
 
     private String uidLoginString;
     private String[] nameStrings, descriptionStrings,
-            priceStrings, stockStrings, urlPathStrings;
+            priceStrings, stockStrings, urlPathStrings, keyStrings;
+    private ListView listView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        listView = getView().findViewById(R.id.listViewShopSupplier);
 
 //        Find Login
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -54,7 +57,7 @@ public class ShopSuppliesFragment extends Fragment {
 
     private void createListView() {
 
-        final ListView listView = getView().findViewById(R.id.listViewShopSupplier);
+
         final int[] countInts = new int[]{0};
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -67,15 +70,23 @@ public class ShopSuppliesFragment extends Fragment {
 
                 int amountProductInt = (int) dataSnapshot.getChildrenCount();
                 Log.d("9AprilV1", "จำนวนของ Product ==> " + amountProductInt);
+
                 nameStrings = new String[amountProductInt];
                 descriptionStrings = new String[amountProductInt];
                 priceStrings = new String[amountProductInt];
                 stockStrings = new String[amountProductInt];
                 urlPathStrings = new String[amountProductInt];
+                keyStrings = new String[amountProductInt];
 
                 try {
+
                     List list = new ArrayList();
+
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                        keyStrings[countInts[0]] = dataSnapshot1.getKey();
+                        Log.d("9AprilV2", "keyString[" + countInts[0] + "] ==> " + keyStrings[countInts[0]]);
+
 
                         ShopModel shopModel = dataSnapshot1.getValue(ShopModel.class);
                         list.add(shopModel);
@@ -105,7 +116,7 @@ public class ShopSuppliesFragment extends Fragment {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        showAlertDialog(nameStrings[position], "oq6OKUd1V2dhLN9mKxWCREsXrpw1-5252");
+                        showAlertDialog(nameStrings[position], keyStrings[position]);
                     }
                 });
 
@@ -123,6 +134,7 @@ public class ShopSuppliesFragment extends Fragment {
 
     private void showAlertDialog(String nameString, final String childClickString) {
 
+        Log.d("9AprilV3", "childClick ==> " + childClickString);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference()
                 .child("ShopSupplier")
@@ -145,6 +157,14 @@ public class ShopSuppliesFragment extends Fragment {
         builder.setNeutralButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .remove(new ShopSuppliesFragment())
+                        .replace(R.id.contentServiceFragment,
+                                EditShopFragment.editShopInstance(childClickString, uidLoginString))
+                        .commit();
+
                 dialog.dismiss();
             }
         });

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/padding"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Heading-->
+            <TextView
+                android:textSize="@dimen/h2"
+                android:text="Head"
+                android:layout_width="@dimen/distance1"
+                android:layout_height="wrap_content" />
+
+            <!--Current Date-->
+            <TextView
+                android:layout_marginTop="@dimen/padding"
+                android:textSize="@dimen/h2"
+                android:text="April 10, 2018"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Inside Address-->
+            <TextView
+                android:layout_marginTop="@dimen/padding"
+                android:textSize="@dimen/h2"
+                android:text="Inside Address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Greeting-->
+            <TextView
+                android:layout_marginTop="@dimen/padding"
+                android:textSize="@dimen/h2"
+                android:text="Dear Sirs:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Body-->
+            <EditText
+                android:layout_marginTop="@dimen/padding"
+                android:textSize="@dimen/h2"
+                android:hint="Head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--Complimentary-->
+            <TextView
+                android:layout_marginTop="@dimen/padding"
+                android:textSize="@dimen/h2"
+                android:text="Sincerely Yours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Signature-->
+            <ImageView
+                android:layout_marginTop="@dimen/padding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/signature"
+                android:layout_width="@dimen/avata"
+                android:layout_height="@dimen/h1" />
+
+            <!--Position-->
+            <TextView
+                android:layout_marginTop="@dimen/padding"
+                android:textSize="@dimen/h2"
+                android:text="Position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +31,7 @@ import srongklod_bangtamruat.plantseconomic.utility.SupplierModel;
 
 public class MessageSupplierFragment extends Fragment {
 
-    private TextView headTextView, currentDateTextView,
-            insideAddressTextView, positionTextView;
+    private TextView headTextView, currentDateTextView, positionTextView;
     private EditText bodyEditText;
     private String uidLoginString;
     private String uidUserString, companyString,
@@ -51,16 +51,47 @@ public class MessageSupplierFragment extends Fragment {
 //        Get Value From Firebase
         getValueFromFirebase();
 
-
+//        Create Sender Spinner
+        createSenderSpinner();
 
 
     }   // Main Method
+
+    private void createSenderSpinner() {
+
+        Spinner spinner = getView().findViewById(R.id.senderSpinner);
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference()
+                .child("Customer");
+
+        int[] timesInts = new int[]{0};
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                int amountCustomerInt = (int) dataSnapshot.getChildrenCount();
+                Log.d("18AprilV1", "Amount of Customer ==> " + amountCustomerInt);
+
+            }   // onDataChange
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+    }   // createSenderSpinner
 
     private void showView() {
 
         headTextView = getView().findViewById(R.id.txtHead);
         currentDateTextView = getView().findViewById(R.id.txtCurrentDate);
-        insideAddressTextView = getView().findViewById(R.id.txtInsideAddress);
         positionTextView = getView().findViewById(R.id.txtPosition);
         bodyEditText = getView().findViewById(R.id.edtBody);
 

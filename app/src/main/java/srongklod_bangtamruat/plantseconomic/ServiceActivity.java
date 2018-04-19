@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,6 +75,15 @@ public class ServiceActivity extends AppCompatActivity {
 
 
     }   // Main Method
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        Toast.makeText(ServiceActivity.this, "Cannot Back Process",
+                Toast.LENGTH_SHORT).show();
+
+    }
 
     public void myCloseDrawer() {
         drawerLayout.closeDrawers();

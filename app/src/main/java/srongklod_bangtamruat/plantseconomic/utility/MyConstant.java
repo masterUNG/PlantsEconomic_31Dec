@@ -8,6 +8,10 @@ import srongklod_bangtamruat.plantseconomic.R;
 
 public class MyConstant {
 
+    private String[] unitMoneyStrings = new String[]{"THB.", "USD."};
+
+    private String[] unitStockStrings = new String[]{"Pcs", "Dozen", "Chest"};
+
     private int[] iconCustomerInts = new int[]{
             R.drawable.icon_custom1,
             R.drawable.icon_custom2,
@@ -77,6 +81,14 @@ public class MyConstant {
             "uidUserString",
             "statusString"};
 
+
+    public String[] getUnitMoneyStrings() {
+        return unitMoneyStrings;
+    }
+
+    public String[] getUnitStockStrings() {
+        return unitStockStrings;
+    }
 
     public int[] getIconTransportInts() {
         return iconTransportInts;

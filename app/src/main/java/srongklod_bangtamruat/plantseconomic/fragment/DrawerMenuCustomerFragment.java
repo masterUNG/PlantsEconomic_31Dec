@@ -91,6 +91,13 @@ public class DrawerMenuCustomerFragment extends Fragment{
                                 .replace(R.id.contentServiceFragment, new NewsFragment())
                                 .commit();
                         break;
+                    case 4:
+//                        For Shop
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.contentServiceFragment, new ShowShopCustomerFragment())
+                                .commit();
+
                 }   // switch
 
                 ((ServiceActivity)getActivity()).myCloseDrawer();

@@ -4,34 +4,50 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--Date-->
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_margin="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="@dimen/h1"
-            android:text="Month xx, xxxx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@drawable/my_green"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
 
-        <!--Name and Surname-->
-        <TextView
-            android:id="@+id/txtNameAnSur"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="italic"
-            android:textSize="@dimen/h1"
-            android:text="Name and Surname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
-    </LinearLayout>
+
+            <!--Date-->
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_margin="10dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="@dimen/h1"
+                android:text="Month xx, xxxx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Name and Surname-->
+            <TextView
+                android:id="@+id/txtNameAnSur"
+                android:layout_marginLeft="10dp"
+                android:textColor="#ffffff"
+                android:textStyle="italic"
+                android:textSize="@dimen/h1"
+                android:text="Name and Surname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 
 

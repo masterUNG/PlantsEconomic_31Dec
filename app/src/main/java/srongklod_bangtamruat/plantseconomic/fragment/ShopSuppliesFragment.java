@@ -109,6 +109,11 @@ public class ShopSuppliesFragment extends Fragment {
                     Log.d("9AprilV1", "e Error ==> " + e.toString());
                 }
 
+                if (nameStrings.length == 0) {
+                    addShopSupplies();
+                }
+
+
                 ShopSupplierAdapter shopSupplierAdapter = new ShopSupplierAdapter(getActivity(),
                         nameStrings, descriptionStrings, priceStrings, stockStrings, urlPathStrings);
                 listView.setAdapter(shopSupplierAdapter);

@@ -5,15 +5,20 @@ import android.os.Parcelable;
 
 public class ShopModel implements Parcelable{
 
-    private String nameProduceString, descreptionString,
+    private String nameProduceString, categoryString, descreptionString,
             priceString, stockString, urlImagePathString;
 
     public ShopModel() {
     }
 
-    public ShopModel(String nameProduceString, String descreptionString,
-                     String priceString, String stockString, String urlImagePathString) {
+    public ShopModel(String nameProduceString,
+                     String categoryString,
+                     String descreptionString,
+                     String priceString,
+                     String stockString,
+                     String urlImagePathString) {
         this.nameProduceString = nameProduceString;
+        this.categoryString = categoryString;
         this.descreptionString = descreptionString;
         this.priceString = priceString;
         this.stockString = stockString;
@@ -22,6 +27,7 @@ public class ShopModel implements Parcelable{
 
     protected ShopModel(Parcel in) {
         nameProduceString = in.readString();
+        categoryString = in.readString();
         descreptionString = in.readString();
         priceString = in.readString();
         stockString = in.readString();
@@ -46,6 +52,14 @@ public class ShopModel implements Parcelable{
 
     public void setNameProduceString(String nameProduceString) {
         this.nameProduceString = nameProduceString;
+    }
+
+    public String getCategoryString() {
+        return categoryString;
+    }
+
+    public void setCategoryString(String categoryString) {
+        this.categoryString = categoryString;
     }
 
     public String getDescreptionString() {
@@ -88,9 +102,10 @@ public class ShopModel implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nameProduceString);
+        dest.writeString(categoryString);
         dest.writeString(descreptionString);
         dest.writeString(priceString);
         dest.writeString(stockString);
         dest.writeString(urlImagePathString);
     }
-}
+}   // Main Class

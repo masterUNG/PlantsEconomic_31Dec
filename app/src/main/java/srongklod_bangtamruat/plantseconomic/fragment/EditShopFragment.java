@@ -45,7 +45,7 @@ public class EditShopFragment extends Fragment {
     private Button button;
     private EditText nameEditText, descriptionEditText, priceEditText, stockEditText;
     private String nameString, descriptionString, priceString,
-            stockString, urlImageString, unitMoneyString, unitStockString;
+            stockString, urlImageString, unitMoneyString, unitStockString, categoryString;
     private boolean imageABoolean = false;
     private Uri uri;
 
@@ -81,6 +81,54 @@ public class EditShopFragment extends Fragment {
         buttonController();
 
     }   // Main Method
+
+    private void categorySpinner() {
+
+        Spinner spinner = getView().findViewById(R.id.spinnerCategory);
+
+        MyConstant myConstant = new MyConstant();
+        final String[] strings = myConstant.getCategoryShopStrings();
+        Log.d("28AprilV1", "Old Category ==> " + categoryString);
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, strings);
+
+        spinner.setAdapter(stringArrayAdapter);
+
+        if (categoryString != null) {
+            spinner.setSelection(findIndex());
+        }
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categoryString = strings[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+    }
+
+    private int findIndex() {
+
+        int index = 0;
+        MyConstant myConstant = new MyConstant();
+        String[] strings = myConstant.getCategoryShopStrings();
+
+        for (int i=0; i<strings.length; i+=1) {
+            if (categoryString.equals(strings[i])) {
+                index = i;
+            }
+        }
+
+        return index;
+    }
 
     private void buttonController() {
         Button button = getView().findViewById(R.id.btnAddShop);
@@ -155,7 +203,7 @@ public class EditShopFragment extends Fragment {
         priceString = priceString + " " + unitMoneyString;
         stockString = stockString + " " + unitStockString;
 
-        ShopModel shopModel = new ShopModel(nameString, descriptionString, priceString,
+        ShopModel shopModel = new ShopModel(nameString, categoryString, descriptionString, priceString,
                 stockString, urlImageString);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -289,10 +337,14 @@ public class EditShopFragment extends Fragment {
                 ShopModel shopModel = dataSnapshot.getValue(ShopModel.class);
 
                 String nameString = shopModel.getNameProduceString();
+                categoryString = shopModel.getCategoryString();
                 String descriptionString = shopModel.getDescreptionString();
                 String priceString = shopModel.getPriceString();
                 String stockString = shopModel.getStockString();
                 urlImageString = shopModel.getUrlImagePathString();
+
+                //        category Spinner
+                categorySpinner();
 
                 MyConstant myConstant = new MyConstant();
 

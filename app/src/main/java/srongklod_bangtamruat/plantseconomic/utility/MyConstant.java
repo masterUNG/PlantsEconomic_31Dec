@@ -8,6 +8,8 @@ import srongklod_bangtamruat.plantseconomic.R;
 
 public class MyConstant {
 
+    private String[] categoryShopStrings = new String[]{"General", "Frozen", "Dry", "Fresh", "Pickle"};
+
     private String[] unitMoneyStrings = new String[]{"THB.", "USD."};
 
     private String[] unitStockStrings = new String[]{"Pcs", "Dozen", "Chest"};
@@ -81,6 +83,10 @@ public class MyConstant {
             "uidUserString",
             "statusString"};
 
+
+    public String[] getCategoryShopStrings() {
+        return categoryShopStrings;
+    }
 
     public String[] getUnitMoneyStrings() {
         return unitMoneyStrings;

@@ -7,19 +7,98 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import srongklod_bangtamruat.plantseconomic.R;
+import srongklod_bangtamruat.plantseconomic.utility.MyConstant;
 
 public class ShowShopCustomerFragment extends Fragment {
+
+    private TextView hub0TextView, hub1TextView, hub2TextView, hub3TextView, hub4TextView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        Initial View
+        initialView();
 
+//        Show View
+        showView();
 
+//        Set Controller
+        setController();
 
     }   // Main Method
+
+    private void showView() {
+        MyConstant myConstant = new MyConstant();
+        String[] strings = myConstant.getCategoryShopStrings();
+
+        hub0TextView.setText(strings[0]);
+        hub1TextView.setText(strings[1]);
+        hub2TextView.setText(strings[2]);
+        hub3TextView.setText(strings[3]);
+        hub4TextView.setText(strings[4]);
+
+    }
+
+    private void setController() {
+        hub0TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListShop(0);
+            }
+        });
+
+        hub1TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListShop(1);
+            }
+        });
+
+        hub2TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListShop(2);
+            }
+        });
+
+        hub3TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListShop(3);
+            }
+        });
+
+        hub4TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showListShop(4);
+            }
+        });
+    }   // setController
+
+    private void showListShop(int index) {
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.contentServiceFragment,
+                        ListShopWhereByCategoryFragment.listShopWhereByCategoryInstance(index))
+                .commit();
+
+
+
+    }
+
+    private void initialView() {
+        hub0TextView = getView().findViewById(R.id.txtHub0);
+        hub1TextView = getView().findViewById(R.id.txtHub1);
+        hub2TextView = getView().findViewById(R.id.txtHub2);
+        hub3TextView = getView().findViewById(R.id.txtHub3);
+        hub4TextView = getView().findViewById(R.id.txtHub4);
+    }
 
     @Nullable
     @Override

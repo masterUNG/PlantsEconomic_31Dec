@@ -33,7 +33,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import srongklod_bangtamruat.plantseconomic.R;
@@ -53,6 +55,8 @@ public class MessageSupplierFragment extends Fragment {
             bussinessString, headquartersString, statusString;
     private ArrayList<String> nameAnSurnameStringArrayList, uidSenderStringArrayList;
     private String currentDateString, senderString, messageString, uidSenderString;
+
+    private String idMessageString;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -107,7 +111,7 @@ public class MessageSupplierFragment extends Fragment {
 
                     Random random = new Random();
                     int i = random.nextInt(10000);
-                    String idMessageString = "idMessage-" + Integer.toString(i);
+                    idMessageString = "idMessage-" + Integer.toString(i);
 
                     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference databaseReference = firebaseDatabase.getReference()
@@ -120,6 +124,8 @@ public class MessageSupplierFragment extends Fragment {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
+
+                                    changeReceiveMessage();
 
                                     Toast.makeText(getActivity(), "Success Update to Firebase",
                                             Toast.LENGTH_SHORT).show();
@@ -145,6 +151,20 @@ public class MessageSupplierFragment extends Fragment {
 
             }   // onClick
         });
+    }
+
+    private void changeReceiveMessage() {
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference()
+                .child("Customer")
+                .child(uidSenderString);
+
+        Map<String, Object> stringObjectMap = new HashMap<String, Object>();
+        stringObjectMap.put("ReceiveMessage", "true");
+        databaseReference.updateChildren(stringObjectMap);
+
+
     }
 
     private void createSenderSpinner() {

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class ListShopWhereByCategoryFragment extends Fragment {
 
     private int timesShop = 0;
     private int timesDetail = 0;
+    private ArrayList<String> myNameProductStringArrayList;
 
     public static ListShopWhereByCategoryFragment listShopWhereByCategoryInstance(int indexInt) {
 
@@ -72,6 +74,7 @@ public class ListShopWhereByCategoryFragment extends Fragment {
         priceStringsStringArrayList = new ArrayList<>();
         imageStringArrayList = new ArrayList<>();
         stockStringArrayList = new ArrayList<>();
+        myNameProductStringArrayList = new ArrayList<>();
 
     }
 
@@ -194,6 +197,8 @@ public class ListShopWhereByCategoryFragment extends Fragment {
 
                     if (categoryString.equals(String.valueOf(map.get("categoryString")))) {
 
+                        myNameProductStringArrayList.add(dataSnapshot.getKey().toString());
+
                         nameStringArrayList.add(nameString);
                         descriptionStringArrayList.add(String.valueOf(map.get("descreptionString")));
                         priceStringsStringArrayList.add(String.valueOf(map.get("priceString")));
@@ -218,6 +223,20 @@ public class ListShopWhereByCategoryFragment extends Fragment {
                                 myChangeArrayListToArray.myArray(stockStringArrayList.toString()),
                                 myChangeArrayListToArray.myArray(imageStringArrayList.toString()));
                         listView.setAdapter(shopSupplierAdapter);
+
+                        Log.d("12MayV1", "ชื่อ Child ที่ถูกเลือก cat ==> " + myNameProductStringArrayList.toString());
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                                Log.d("12MayV1", "You Click ==> " + myNameProductStringArrayList.get(position));
+
+
+                            }
+                        });
+
+
 
                     } catch (Exception e) {
                         e.printStackTrace();

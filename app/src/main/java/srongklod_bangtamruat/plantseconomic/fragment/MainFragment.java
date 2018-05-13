@@ -54,7 +54,9 @@ public class MainFragment extends Fragment{
 
     private void checkStatusLogin() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() != null) {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            Log.d("12MayV2", "Current User ==> " + firebaseUser.getDisplayName());
             intentToService();
         }
     }

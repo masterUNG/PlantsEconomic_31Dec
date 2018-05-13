@@ -47,9 +47,16 @@ import srongklod_bangtamruat.plantseconomic.utility.PostModel;
 
 public class AddFriendCustomerFragment extends Fragment {
 
+    private String uidLoginedString;
+
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+//        Find uidLoginedString
+        findUidLogin();
 
 //        Create ListView
         createListView();
@@ -57,19 +64,30 @@ public class AddFriendCustomerFragment extends Fragment {
 
     }   // Main Method
 
+    private void findUidLogin() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        uidLoginedString = firebaseUser.getUid();
+    }
+
     private void createListView() {
 
         final ListView listView = getView().findViewById(R.id.listViewAddFriend);
         final int[] timeInts = new int[]{0};
 
 
+//        ===========================================================
+//            Read All data From Node Customer
+//        ===========================================================
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("Customer");
+        DatabaseReference databaseReference = firebaseDatabase.getReference()
+                .child("Customer");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 int timeAInt = (int) dataSnapshot.getChildrenCount();
+                timeAInt -= 1;
 
                 Log.d("28MarchV1", "timeAInt ==> " + timeAInt);
                 final String[] nameStrings = new String[timeAInt];
@@ -83,8 +101,14 @@ public class AddFriendCustomerFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
+                    String keyString = dataSnapshot1.getKey().toString();
+                    Log.d("13MayV1", "keyString ==> " + keyString);
+
                     CustomerModel customerModel = dataSnapshot1.getValue(CustomerModel.class);
-                    list.add(customerModel);
+
+                    if (!(keyString.equals(uidLoginedString))) {
+                        list.add(customerModel);
+
 
                     CustomerModel customerModel1 = (CustomerModel) list.get(timeInts[0]);
                     Log.d("28MarchV1", "Name ==> " + customerModel1.getNameString());
@@ -95,6 +119,8 @@ public class AddFriendCustomerFragment extends Fragment {
                     uidFriendStrings[timeInts[0]] = customerModel1.getUidUserString();
 
                     timeInts[0] += 1;
+
+                    }   // if
 
                 }   // for
 
